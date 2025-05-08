@@ -1,0 +1,71 @@
+[gd_scene load_steps=9 format=3 uid="uid://ucnbjcxrmku"]
+
+[ext_resource type="Script" path="res://Scripts/Bullet.gd" id="1_omfjk"]
+[ext_resource type="Texture2D" uid="uid://d3rjc27cjaf5w" path="res://Sprites/Bubble.png" id="2_83lld"]
+[ext_resource type="PackedScene" uid="uid://csddwk1gmcmr4" path="res://Scenes/BubbleDebris.tscn" id="3_12dy1"]
+
+[sub_resource type="GDScript" id="GDScript_p1ktt"]
+
+[sub_resource type="Shader" id="Shader_yvwsq"]
+code = "shader_type canvas_item;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	// Called for every pixel the material is visible on.
+}
+
+//void light() {
+	// Called for every pixel for every light affecting the CanvasItem.
+	// Uncomment to replace the default light processing function with this one.
+//}
+"
+script = SubResource("GDScript_p1ktt")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0y0t3"]
+shader = SubResource("Shader_yvwsq")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7gupj"]
+radius = 48.0104
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ad158"]
+radius = 14.0
+
+[node name="Bullet" type="Node2D"]
+script = ExtResource("1_omfjk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_0y0t3")
+scale = Vector2(3, 3)
+texture = ExtResource("2_83lld")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+visible = false
+scale = Vector2(10.0349, 9.46601)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.7
+autostart = true
+
+[node name="ExplosionRadius" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionRadius"]
+shape = SubResource("CircleShape2D_7gupj")
+
+[node name="BulletArea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletArea"]
+shape = SubResource("CircleShape2D_ad158")
+
+[node name="GPUParticles2D" parent="." instance=ExtResource("3_12dy1")]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="BulletArea" to="." method="_on_bullet_area_body_entered"]

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://csddwk1gmcmr4"]
+
+[ext_resource type="Script" path="res://Scripts/BubbleDebris.gd" id="1_c88mc"]
+[ext_resource type="Texture2D" uid="uid://cr1m4opyesn0l" path="res://Sprites/WaterBar.png" id="1_wplvj"]
+[ext_resource type="AudioStream" uid="uid://bybi2kwg3spy8" path="res://Sounds/bubble-pop-5-323639.mp3" id="2_jojp8"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mih7t"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 0.01
+angle_min = 1.07288e-05
+angle_max = 360.0
+spread = 180.0
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 1, 0)
+scale_min = 0.1
+scale_max = 0.2
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_mih7t")
+texture = ExtResource("1_wplvj")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+script = ExtResource("1_c88mc")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_jojp8")

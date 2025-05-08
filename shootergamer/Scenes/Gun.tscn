@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://bs0drka0rlh7o"]
+
+[ext_resource type="Script" path="res://Scripts/Gun.gd" id="1_6qfkb"]
+[ext_resource type="Texture2D" uid="uid://b1wrm1gt3o52u" path="res://Sprites/WaterGun.png" id="2_b05uc"]
+[ext_resource type="AudioStream" uid="uid://dsddp7tw1qnlq" path="res://Sounds/puffsound.mp3" id="3_fwqwr"]
+
+[node name="Gun" type="Node2D" groups=["Gun"]]
+script = ExtResource("1_6qfkb")
+maxAmmo = 100
+damage = 10
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = ExtResource("2_b05uc")
+
+[node name="Bulletpos" type="Marker2D" parent="."]
+position = Vector2(39, 0)
+
+[node name="Shootspeed" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="RefilTimer" type="Timer" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_fwqwr")
+
+[connection signal="timeout" from="Shootspeed" to="." method="_on_shootspeed_timeout"]
+[connection signal="timeout" from="RefilTimer" to="." method="_on_refil_timer_timeout"]

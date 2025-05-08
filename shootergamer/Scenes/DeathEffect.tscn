@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://duc4y031ongfu"]
+
+[ext_resource type="Script" path="res://Scripts/DeathEffect.gd" id="1_qv0ky"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rl3y0"]
+particle_flag_disable_z = true
+inherit_velocity_ratio = 1.0
+spread = 180.0
+radial_velocity_min = -364.71
+radial_velocity_max = 321.54
+gravity = Vector3(0, 98, 0)
+scale_min = 0.0
+scale_max = 14.39
+scale_over_velocity_max = 561.15
+color = Color(0, 0.729412, 1, 1)
+anim_speed_max = 1.73
+turbulence_noise_strength = 20.0
+turbulence_noise_scale = 0.0
+
+[node name="DeathEffect" type="GPUParticles2D"]
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_rl3y0")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.58
+trail_lifetime = 0.1
+script = ExtResource("1_qv0ky")
