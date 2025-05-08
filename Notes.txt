@@ -1,6 +1,0 @@
-Ideas: 
-- Top Down 2D
-- Player has gun that shoots water (Kinda like a flamethrower)
-- Water cleanses the environment and enemies
-- Enemies are angry plants, that once cleansed turn into Happy plants
-- Upgrades to increase range and damage
