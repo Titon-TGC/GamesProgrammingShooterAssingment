@@ -1,6 +1,4 @@
-Name: Patryk Rittau
-Student Number: C24354133
-Course: TU984
+
 
 ## Project Title
 
