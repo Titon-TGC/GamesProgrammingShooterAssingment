@@ -32,6 +32,8 @@ func _on_timer_timeout() -> void:
 	queue_free()
 	
 func explode() -> void:
+	if tilemap == null:
+		return
 	for cell in tilemap.get_used_cells():
 		var local_position = tilemap.map_to_local(cell)
 		var explosion_center = $ExplosionRadius/CollisionShape2D.global_position

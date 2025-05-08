@@ -13,6 +13,7 @@ var last_facing_direction = Vector2(0, -1)
 func _physics_process(delta):
 	$"../CanvasLayer/Panel/PlayerStats/HealthBar".max_value = maxhealth
 	$"../CanvasLayer/Panel/PlayerStats/HealthBar".value = currentHealth
+	$"../CanvasLayer/Panel/PlayerStats/HealthBar/Health".text = str(currentHealth) + "/" + str(maxhealth)
 	
 	var input_direction = Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * speed
@@ -40,16 +41,14 @@ func TakeDamage(damage):
 	$Hurt.play()
 	currentHealth -= damage
 	print("Took ", damage)
-	$"../CanvasLayer/Panel/PlayerStats/HealthBar/Health".text = str(currentHealth) + "/" + str(maxhealth)
 	if currentHealth <= 0:
 		die()
 
 func Heal(healAmount):
 	$Potion.play()
 	currentHealth += healAmount
-	$"../CanvasLayer/Panel/PlayerStats/HealthBar/Health".text = str(currentHealth) + "/" + str(maxhealth)
-	if currentHealth >= 100:
-		currentHealth = 100
+	if currentHealth >= maxhealth:
+		currentHealth = maxhealth
 
 func die():
 	FinalStats.wavesSurvived = gamemanager.waveCounter
